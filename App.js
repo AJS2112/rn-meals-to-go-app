@@ -10,9 +10,9 @@ import { theme } from './src/infrastructure/theme';
 import { useFonts as useOswald, Oswald_400Regular } from '@expo-google-fonts/oswald';
 import { useFonts as useLato, Lato_400Regular } from '@expo-google-fonts/lato';
 
-import { RestaurantScreen } from './src/features/restaurants/screens/restaurants.screen';
+import { RestaurantsContextProvider } from './src/services/restaurants/restaurants.context';
 
-import { restaurantsRequest } from './src/services/restaurants/restaurants.service';
+import { RestaurantScreen } from './src/features/restaurants/screens/restaurants.screen';
 
 const Tab = createBottomTabNavigator();
 
@@ -47,16 +47,18 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <NavigationContainer>
-          <Tab.Navigator
-            screenOptions={createScreenOptions}
+        <RestaurantsContextProvider>
 
-          >
-            <Tab.Screen name="Restaurants" component={RestaurantScreen} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
-            <Tab.Screen name="Map" component={MapScreen} />
-          </Tab.Navigator>
-        </NavigationContainer>
+          <NavigationContainer>
+            <Tab.Navigator
+              screenOptions={createScreenOptions}
+            >
+              <Tab.Screen name="Restaurants" component={RestaurantScreen} />
+              <Tab.Screen name="Settings" component={SettingsScreen} />
+              <Tab.Screen name="Map" component={MapScreen} />
+            </Tab.Navigator>
+          </NavigationContainer>
+        </RestaurantsContextProvider>
         <ExpoStatusBar style="auto" />
       </ThemeProvider>
     </>
