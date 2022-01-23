@@ -9,13 +9,12 @@ export const locationRequest = (searchTerm) => {
             reject("not found")
         };
 
-        RecyclerViewBackedScrollViewBase(locationMock);
+        result(locationMock);
     });
 };
 
 export const locationTransform = (result) => {
     const { geometry = {} } = camelize(result.results)[0];
-    const { let, lng } = geometry.location;
-
+    const { lat, lng } = geometry.location;
     return { lat, lng };
 };
